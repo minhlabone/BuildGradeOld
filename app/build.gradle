@@ -1,0 +1,66 @@
+plugins {
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
+    id("androidx.navigation.safeargs")
+    id("kotlin-parcelize")
+}
+
+apply from: 'dependencies.gradle'
+
+android {
+    compileSdk 34
+    namespace = "com.example.test"
+
+    lintOptions {
+        warning 'NewerVersionAvailable'
+    }
+
+
+    defaultConfig {
+        applicationId "com.example.test"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+
+        release {
+
+            minifyEnabled false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        buildConfig true
+        viewBinding true
+    }
+
+}
+
+dependencies {
+    implementation "androidx.core:core-ktx:${core_ktx_version}"
+    implementation "androidx.appcompat:appcompat:${appcompat_version}"
+    implementation "com.google.android.material:material:${material_version}"
+    implementation "androidx.constraintlayout:constraintlayout:${constraintLayout_version}"
+    testImplementation "junit:junit:${junit_version}"
+    androidTestImplementation "androidx.test.ext:junit:${ext_junit_version}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${expresso_version}"
+    implementation "com.google.dagger:hilt-android:${hilt_version}"
+    kapt "com.google.dagger:hilt-compiler:${hilt_version}"
+    kapt "androidx.hilt:hilt-compiler:${hilt_compiler_version}"
+}
